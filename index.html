@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All MOVIE LINK</title>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffcc00;
+            margin-top: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        .timer {
+            font-size: 3rem;
+            color: #ff0000;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+
+        .timer span {
+            font-size: 4rem;
+        }
+
+        .film-reel {
+            width: 100px;
+            height: 100px;
+            background-image: url('https://image.shutterstock.com/image-vector/film-reel-icon-flat-illustration-260nw-1075471625.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 50px auto;
+        }
+
+        .redirect-message {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            color: #00ff00;
+            display: none;
+        }
+
+        .button {
+            background-color: #ffcc00;
+            color: black;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .button:hover {
+            background-color: #ff9900;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 1rem;
+            color: #888;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .message, .timer, .redirect-message, .button {
+                font-size: 1.1rem;
+            }
+
+            .film-reel {
+                width: 80px;
+                height: 80px;
+            }
+
+            .button {
+                padding: 12px 25px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .message, .timer, .redirect-message, .button {
+                font-size: 1rem;
+            }
+
+            .film-reel {
+                width: 60px;
+                height: 60px;
+            }
+
+            .button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>All MOVIE LINK</h1>
+
+    <div class="film-reel"></div>
+
+    <div class="message">
+        <p>Please wait for <span class="timer" id="timer">15:00</span> to receive the movie link.</p>
+        <p>Thank you for your patience!</p>
+    </div>
+
+    <div class="redirect-message" id="redirect-message">
+        <p>Redirecting you to the movie link...</p>
+    </div>
+
+    <button class="button" id="getMovieLinkButton" onclick="redirectToMoviePage()" disabled>Get Movie Link Now</button>
+
+    <div class="footer">
+        <p>&copy; 2025 All MOVIE LINK. All Rights Reserved.</p>
+    </div>
+
+    <script>
+        let timeLeft = 900; // 15 minutes in seconds
+        let timerElement = document.getElementById('timer');
+        let redirectMessage = document.getElementById('redirect-message');
+        let getMovieLinkButton = document.getElementById('getMovieLinkButton');
+
+        function updateTimer() {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            timerElement.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+
+            if (timeLeft > 0) {
+                timeLeft--;
+            } else {
+                clearInterval(timerInterval);
+                // Show redirect message
+                redirectMessage.style.display = 'block';
+                // Enable the "Get Movie Link Now" button
+                getMovieLinkButton.disabled = false;
+            }
+        }
+
+        let timerInterval = setInterval(updateTimer, 1000);
+
+        function redirectToMoviePage() {
+            window.location.href = 'movie.html'; // Redirect to movie page when button is clicked
+        }
+    </script>
+</body>
+</html>
